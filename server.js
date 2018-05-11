@@ -13,7 +13,7 @@ const stripe = require("stripe")(
 
 app.use(bodyParser.raw({ limit: '50mb', type: 'text' }))
 app.use(bodyParser.raw({ type: 'application/json' }))
-  var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-c14a38e71f.json");
+  var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json");
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
