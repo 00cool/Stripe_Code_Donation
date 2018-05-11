@@ -28,11 +28,11 @@ app.use(bodyParser.raw({ type: 'application/json' }))
 // request handling
 
 app.use('*', (req, res, next) => {
-  let allowedOrigins = ['http://localhost:4200', 'http://localhost:5000'];
+  let allowedOrigins = ['http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/'];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     console.log(origin);
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200', 'http://localhost:5000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/');
   }
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
   res.set('Access-Control-Allow-Credentials', 'true');
@@ -184,7 +184,7 @@ app.post("/charge", (req, res) => {
       else if(charge!=null){
         console.log(charge);
         // call email sent
-        res.redirect('http://localhost:4200/mail/' + charge.id)
+        res.redirect('https://stripepaymentdonation.herokuapp.com/mail/' + charge.id)
         res.status(200).json(charge);
         res.end();
       }
