@@ -19,7 +19,7 @@ var firestoreDb = admin.firestore();
 
   // parse JSON inputs
 app.use(bodyParser.json());
-
+app.use(express.static(__dirname + '/dist'));
 // raw data parse
 
 app.use(bodyParser.raw({ limit: '50mb', type: 'text' }))
