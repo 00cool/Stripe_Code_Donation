@@ -7,8 +7,20 @@ const stripe = require("stripe")(
     "sk_test_xtz7vzUNDhyFM1leNDKmLLAW"
   );
   app.use(express.static(__dirname + '/dist'));
+  app.use('*', (req, res, next) => {
+    let allowedOrigins = ['http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/'];
+    let origin = req.headers.origin;
+    if (allowedOrigins.indexOf(origin) > -1) {
+      console.log(origin);
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/');
+    }
+    res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.set('Access-Control-Allow-Methods', "GET,POST,PUT,OPTIONS,DELETE");
+    next();
+  });
   app.use(bodyParser.json());
-
+  
 // raw data parse
 
 app.use(bodyParser.raw({ limit: '50mb', type: 'text' }))
