@@ -11,7 +11,7 @@ import {RouterModule, Routes} from '@angular/router';
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 // // import * as fs from 'file-system';
 import {ApiService} from './api.service'
-
+import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
 
 
 export const router: Routes =[
@@ -36,7 +36,7 @@ export const router: Routes =[
     RouterModule.forRoot(router),
     
   ],
-  providers: [ApiService],
+  providers: [ApiService, Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
