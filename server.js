@@ -197,7 +197,7 @@ app.post("/charge", (req, res) => {
       else if(charge!=null){
         console.log(charge);
         // call email sent
-        res.redirect('https://stripepaymentdonation.herokuapp.com/mail/' + charge.id)
+        res.redirect('localhost:4200/mail/' + charge.id)
         // res.status(200).json(charge);
        
         // res.end();
