@@ -197,7 +197,8 @@ app.post("/charge", (req, res) => {
       else if(charge!=null){
         console.log(charge);
         // call email sent
-        res.redirect('localhost:4200/mail/' + charge.id)
+        res.redirect('http://localhost:4200/mail/')
+
         // res.status(200).json(charge);
        
         // res.end();
