@@ -648,12 +648,15 @@ app.post('/sendMailReceipt', function (req, res) {
   var pdfData = req.body + '';
 
   var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    name: 'Godaddy',
+    host: "smtpout.secureserver.net",
+    secure: true,
+    port: 465,
     auth: {
-      user: 'jump3602017@gmail.com',
-      pass: 'Jump@3602017'
+    user: 'info@jump360.me',
+    pass: 'jump@2017360'
     }
-  });
+    });
 
   const mailOptions = {
     from: 'jump3602017@gmail.com', // sender address
