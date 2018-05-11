@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "start index.js",
+    "start": "node index.js",
     "postinstall": "ng build --aot=false",
     "test": "ng test",
     "lint": "ng lint",

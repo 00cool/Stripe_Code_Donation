@@ -6,7 +6,7 @@ var admin = require("firebase-admin");
 const stripe = require("stripe")(
     "sk_test_xtz7vzUNDhyFM1leNDKmLLAW"
   );
-
+  app.use(express.static(__dirname + '/dist'));
   var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-c14a38e71f.json");
 
   admin.initializeApp({
@@ -19,7 +19,7 @@ var firestoreDb = admin.firestore();
 
   // parse JSON inputs
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/dist'));
+
 // raw data parse
 
 app.use(bodyParser.raw({ limit: '50mb', type: 'text' }))
