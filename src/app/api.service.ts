@@ -23,7 +23,7 @@ export class ApiService {
         requestOptions.search = params;
 
         console.log("=======================service method called==================");
-        return this.http.post("https://stripepaymentdonation.herokuapp.com/sendMailReceipt", data).map(results => this.result = results);
+        return this.http.post("https://stripepaymentdonation.herokuapp.com/#/sendMailReceipt", data).map(results => this.result = results);
     }
 
     getStripeData(id : any){
@@ -34,7 +34,7 @@ export class ApiService {
         requestOptions.search = params;
 
         console.log("=======================service stripe method called==================");
-      return this.http.get("https://stripepaymentdonation.herokuapp.com/stripe",requestOptions).map(function(result){
+      return this.http.get("https://stripepaymentdonation.herokuapp.com/#/stripe",requestOptions).map(function(result){
           console.log('data',result.json())
           return (result.json());
       });
