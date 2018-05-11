@@ -1,0 +1,44 @@
+h3 {
+	color: #523806;
+}
+
+tr {
+	border: 1px solid #999;
+	border-top: 0;
+}
+
+td {
+	padding-left: 3px;
+}
+
+.halfTwo {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.style1 {
+	border: 1px solid #999;
+	border-top: 0;
+	background: #eee;
+}
+
+.halfFirst {
+	background: #f7f7f7;
+}
+
+.subTable {
+	border: 0;
+}
+
+.subTableData {}
+
+.subTableTR {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 4fr 1fr 1fr 1fr;
+	border: 0;
+}
+
+.testing_css {
+	background-color: chartreuse;
+}

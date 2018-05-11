@@ -1,0 +1,8 @@
+{
+    "apiKey": "AIzaSyAdvXoC8n6wminzT-b5veYrxloXdVoLN6E",
+    "authDomain": "prod-donation.firebaseapp.com",
+    "databaseURL": "https://prod-donation.firebaseio.com",
+    "projectId": "prod-donation",
+    "storageBucket": "prod-donation.appspot.com",
+    "messagingSenderId": "112589549179"
+  }

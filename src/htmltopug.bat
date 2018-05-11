@@ -1,0 +1,1 @@
+html2pug < /app/ > example.pug
