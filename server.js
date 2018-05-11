@@ -670,4 +670,4 @@ app.post('/sendMailReceipt', function (req, res) {
 
 // start server code
 
-app.listen(process.env.PORT || 5000, () => console.log('Example app listening on port 5000!'))
+app.listen(process.env.PORT || 8080, () => console.log('Example app listening on port 5000!'))
