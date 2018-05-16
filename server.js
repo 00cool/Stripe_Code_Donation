@@ -7,7 +7,7 @@ const stripe = require("stripe")(
   "sk_test_xtz7vzUNDhyFM1leNDKmLLAW"
 );
 
-var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-c14a38e71f.json");
+var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
