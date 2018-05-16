@@ -26,6 +26,7 @@ var config =
 
 export const router: Routes =[
   {path:'mail/:id', component: FirebaseExampleComponent},
+  {path:'',component : AppComponent}
  
   
 ]
