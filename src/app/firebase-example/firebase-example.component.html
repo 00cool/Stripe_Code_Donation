@@ -2,9 +2,6 @@
 <head>
   <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
   <script>
-  
- 
-
   </script>
   
 </head>
@@ -12,34 +9,39 @@
 
 </div>
 <div id='pdf' style="background: #f5f0c4; margin: auto; min-width: 55%; width: 55%; border: 1px solid black; ">
-  <div style="text-align: center;">
+  <div style="text-align: center; padding-top: 5%">
     <img src="../../assets/img/krishana.png" alt="logo">
     <h3>ISKCON-London</h3>
     <h3>Radha-Krishna Temple</h3>
     <h4>Thank you for your donation</h4>
   </div>
-  <span>Please print this confirmation for your records.</span>
+  <div style="text-align: center;">
+    <span style="margin-left: auto">Please print this confirmation for your records.</span>
+  </div>
+  <br>
   <table style=" width: 80%; margin: auto; ">
-    <tr class="style1">Contribution Information</tr>
+    <tr class="style1"  style="border-top: 1px solid  #999">Contribution Item Information</tr>
     <tr style="display: grid; grid-template-columns: 1fr;">
-      <table class="subTable" style="width: 50%;">
-        <tr class="subTableTR">
-          <th class="subTableData">Item</th>
-          <th class="subTableData">Qty</th>
-          <th class="subTableData">Each</th>
-          <th class="subTableData">Total</th>
+      <table class="subTable" style="width: 100%;">
+        <tr style="border: 0">
+          <td style="width: 50%; border: 0; font-weight: bold;">Item</td>
+          <td style="width: 50%; border: 0; font-weight: bold;">Amount</td>
         </tr>
-        <tr *ngFor="let item of List" class="subTableTR">
+        <tr *ngFor="let item of List">
           <td class="subTableData">{{item.name}}</td>
-          <td class="subTableData">{{item.qty}}</td>
-          <td class="subTableData">{{item.each}}</td>
-          <td class="subTableData">{{item.total}}</td>
+        
+          <td class="subTableData">{{item.amount}}</td>
         </tr>
       </table>
     </tr>
+    <tr class="style1">Contribution Information</tr>
+    <tr class="halfTwo">
+      <td class="halfFirst">Receipt Number</td>
+      <td> {{receipt_number}}</td>
+    </tr>
     <tr class="halfTwo">
       <td class="halfFirst">Total Amount</td>
-      <td>£ {{totalAmount}}</td>
+      <td>£{{totalAmount}}</td>
     </tr>
     <tr class="halfTwo">
       <td class="halfFirst">Date</td>
@@ -49,85 +51,16 @@
       <td class="halfFirst">Transaction # </td>
       <td>{{trasactionId}}</td>
     </tr>
-    <tr class="style1" style="font-weight: bold;">
-      Billing Name and Address
-    </tr>
-    <tr>
-      <!-- {{name1}} -->
-
-      {{name2}}
-      <br>
-      {{add1}}
-      <br>  
-      {{add2}}
-      <br>
-      {{add3}}
-      
-      {{country}}
-      <br>
-      {{email}}
-    </tr>
-    <tr class="style1" style="font-weight: bold;">
+       <tr class="style1" style="font-weight: bold;">
       UK / Home Address And Gift aid Declaration
     </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Title</td>
-      <td>{{title}}</td>
-    </tr>
+   
     <tr class="halfTwo">
       <td class="halfFirst">First Name(s)</td>
       <td>{{firstname}}</td>
     </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Surname</td>
-      <td>{{surname}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Initiated Name (if applicable)</td>
-      <td>{{initialName}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Address Line 1  </td>
-      <td>{{add1}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Address Line 2</td>
-      <td>{{add2}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Address Line 3</td>
-      <td>{{add3}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">City</td>
-      <td>{{city}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Post Code</td>
-      <td>{{postal}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Country</td>
-      <td>{{country}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">County</td>
-      <td>{{county}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Mobile</td>
-      <td>{{mobile}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">No Emails Please</td>
-      <td>{{subscription}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">No Postal Mail Please</td>
-      <td>{{mailDelivery}}</td>
-    </tr>
-    <tr class="halfTwo">
-      <td class="halfFirst">Can we Claim Giftaid?</td>
+       <tr class="halfTwo">
+      <td class="halfFirst">Can we Claim Gift Aid Qualifying?</td>
       <td>{{giftaid}}</td>
     </tr>
     <tr class="style1" style="font-weight: bold;">
@@ -139,7 +72,7 @@
     </tr>
     <tr>
       <td>
-      <img src="../../assets/img/president.png">   
+      <img src="../../assets/img/president.png" style="padding-top: 10px">   
       <br>
       <span>Your servant,<br>
       Jai Nitai dasa<br>
@@ -148,5 +81,7 @@
       </td>
     </tr>
   </table>
+  <br>
+  <br>
 </div>
-<button (click)=" uploadImageToFirebase()" >hello</button>
+

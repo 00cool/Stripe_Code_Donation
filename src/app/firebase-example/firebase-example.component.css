@@ -2,13 +2,18 @@ h3 {
 	color: #523806;
 }
 
+table, tr, td {
+	border-collapse: collapse;
+}
+
 tr {
 	border: 1px solid #999;
 	border-top: 0;
+	line-height: 1.5em;
 }
 
 td {
-	padding-left: 3px;
+	padding-left: 7px;
 }
 
 .halfTwo {
@@ -20,6 +25,7 @@ td {
 	border: 1px solid #999;
 	border-top: 0;
 	background: #eee;
+	padding-left: 7px;
 }
 
 .halfFirst {
@@ -34,7 +40,7 @@ td {
 }
 
 .subTableData {
-
+ text-align: left;
 }
 
 .subTableTR {

@@ -8,11 +8,21 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AppComponent } from './app.component';
 import { FirebaseExampleComponent } from './firebase-example/firebase-example.component';
 import {RouterModule, Routes} from '@angular/router'; 
+
+import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
+
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
 // // import * as fs from 'file-system';
 import {ApiService} from './api.service'
-import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
-
+var config =
+{
+  apiKey: "AIzaSyBX3nrDzY7OGGfdRiLGGqhZ2Hh58S0WKf8",
+  authDomain: "donationapp-3a9ae.firebaseapp.com",
+  databaseURL: "https://donationapp-3a9ae.firebaseio.com",
+  projectId: "donationapp-3a9ae",
+  storageBucket: "donationapp-3a9ae.appspot.com",
+  messagingSenderId: "423650619788"
+}
 
 export const router: Routes =[
   {path:'mail/:id', component: FirebaseExampleComponent},
@@ -28,15 +38,15 @@ export const router: Routes =[
   imports: [
     BrowserModule,
     HttpModule,
-    AngularFireModule.initializeApp(environment.source,'source'),
+    AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    // HttpClient,
-    // HttpClientModule,
+    
     AngularFireStorageModule,
     RouterModule.forRoot(router),
     
   ],
-  providers: [ApiService, Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [ApiService , Location, {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
