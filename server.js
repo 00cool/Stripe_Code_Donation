@@ -43,7 +43,7 @@ app.use('*', (req, res, next) => {
 // Also, parse URL encoded inputs
 app.use(bodyParser.urlencoded());
 
-app.get('/', (req, res) => res.send('Hello World!'))
+//app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/getUserData', (req, res) => {
   firestoreDb.collection('users').where('email', "==", 'mitsdesai73@gmail.com').get().then(function (querySnapshot) {
