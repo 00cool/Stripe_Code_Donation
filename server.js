@@ -24,7 +24,7 @@ const stripe = require("stripe")(
 // raw data parse
 
 app.use(bodyParser.raw({ limit: '50mb', type: 'text' }))
-app.use(bodyParser.raw({ type: 'application/json' }))
+app.use(bodyParser.raw({ type: 'application/json',limit: '50mb' }))
   var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json");
 
   admin.initializeApp({
@@ -644,9 +644,13 @@ app.post("/getCustomerCharges", (req, res) => {
 
 // sent mail with receipt pdf
     
-app.post('/sendMailReceipt', function (req, res) {
-  var pdfData = req.body + '';
+pp.post('/sendMailReceipt', function (req, res) {
+  var pdfData = req.body +  '';
+   var email = req.param('email');
+  console.log('id====== ' + email);
 
+  // console.log('pdfData ' +pdfData);
+  // console.log('email ' + email);
   var transporter = nodemailer.createTransport({
     name: 'Godaddy',
     host: "smtpout.secureserver.net",
@@ -655,14 +659,19 @@ app.post('/sendMailReceipt', function (req, res) {
     auth: {
     user: 'info@jump360.me',
     pass: 'jump@2017360'
-    }
-    });
+  }
+});
 
   const mailOptions = {
     from: 'jump3602017@gmail.com', // sender address
-    to: 'harshadakhani8882@gmail.com', // list of receivers
-    subject: 'Subject of your email', // Subject line
-    text: 'hello',
+    to: email, // list of receivers
+    subject: 'Donation Payment Receipt', // Subject line
+    text: "Hare Krishna!\n\n" +
+
+      "        Thanks for your contribution. Please find your donation receipt below.\n\n" +
+
+      "Regards,\n" +
+      "ASK Krishna",
     attachments: [{
       filename: 'receipt.pdf',
       contentType: 'application/pdf',
@@ -686,7 +695,6 @@ app.post('/sendMailReceipt', function (req, res) {
   res.status(200).send('success');
 
 })
-
 
 // start server code
 
