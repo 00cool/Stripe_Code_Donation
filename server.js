@@ -684,7 +684,7 @@ app.get('/sentMail', function (req, res) {
 
   var url = 'https://stripepaymentdonation.herokuapp.com/#/mail/' + chargeId + '+' + userId;
  
-       res.status(200).send(url);
+       res.status(200).redirect(url);
        
          
         
