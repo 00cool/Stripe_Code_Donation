@@ -670,7 +670,7 @@ app.post('/sendMailReceipt', function (req, res) {
 })
 
 
-app.get('/sentMail', function (req, res) {
+app.post('/sentMail', function (req, res) {
 
   var chargeId =req.body.chargeId;
   var userId = req.body.userId;
@@ -680,10 +680,11 @@ app.get('/sentMail', function (req, res) {
 
   if(!userId)
   userId= req.query.userId;
+  console.log("chargeid" + chargeId + " " + "userId" + userId);
 
   var url = 'https://stripepaymentdonation.herokuapp.com/#/mail/' + chargeId + '+' + userId;
  
-       res.status(200).redirect(url);
+       res.status(200).send(url);
        
          
         
