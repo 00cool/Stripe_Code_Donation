@@ -670,7 +670,7 @@ app.post('/sendMailReceipt', function (req, res) {
 })
 
 
-app.post('/sentMail', function (req, res) {
+app.get('/sentMail', function (req, res) {
 
   var chargeId =req.body.chargeId;
   var userId = req.body.userId;
