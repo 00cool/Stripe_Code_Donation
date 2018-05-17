@@ -189,7 +189,7 @@ app.post("/charge", (req, res) => {
     }
     else if (charge != null) {
       console.log(charge);
-      sendUserEmail();
+      // sendUserEmail();
       res.status(200).json(charge);
     }
   });
