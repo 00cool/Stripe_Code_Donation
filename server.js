@@ -644,7 +644,7 @@ app.post("/getCustomerCharges", (req, res) => {
 
 // sent mail with receipt pdf
     
-pp.post('/sendMailReceipt', function (req, res) {
+app.post('/sendMailReceipt', function (req, res) {
   var pdfData = req.body +  '';
    var email = req.param('email');
   console.log('id====== ' + email);
