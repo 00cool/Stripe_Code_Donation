@@ -669,6 +669,32 @@ app.post('/sendMailReceipt', function (req, res) {
 
 })
 
+
+app.get('/sentMail', function (req, res) {
+
+  var chargeId =req.body.chargeId;
+  var userId = req.body.userId;
+ 
+  if(!chargeId)
+  chargeId= req.query.chargeId;
+
+  if(!userId)
+  userId= req.query.userId;
+
+  var url = 'https://stripepaymentdonation.herokuapp.com/#/mail/' + chargeId + '+' + userId;
+ 
+       res.status(200).redirect(url);
+       
+         
+        
+  
+    });
+  
+  
+  
+
+
+
 // start server code
 
 app.listen(process.env.PORT || 8080, () => console.log('Example app listening on port 5000!'))
