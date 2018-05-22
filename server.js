@@ -40,7 +40,7 @@ var firestoreDb = admin.firestore();
 // Also, parse URL encoded inputs
 app.use(bodyParser.urlencoded());
 
-//app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/getUserData', (req, res) => {
 
