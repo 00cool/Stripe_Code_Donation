@@ -6,7 +6,9 @@ var admin = require("firebase-admin");
 const stripe = require("stripe")(
     "sk_test_xtz7vzUNDhyFM1leNDKmLLAW"
   );
-  app.use(express.static(__dirname + '/dist'));
+  var htmlToPdf = require('./html');
+var html = require('./html.js');
+  // app.use(express.static(__dirname + '/dist'));
   app.use('*', (req, res, next) => {
     let allowedOrigins = ['http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/'];
     let origin = req.headers.origin;
@@ -693,7 +695,86 @@ app.get('/sentMail', function (req, res) {
   
     });
   
-  
+    app.post('/sendMailReceipt', function (req, res) {
+
+      var charge_id = req.body.id;
+      var user_id = req.body.user;
+      
+      if(!charge_id)
+         charge_id = req.query.id;
+      if(!user_id)
+         user_id = req.query.user;
+      
+         if(!charge_id)
+         charge_id = req.param('id');
+         if(!user_id)
+         user_id = req.param('user');
+      
+      
+         console.log(charge_id);
+         console.log(user_id);
+      
+        stripe.charges.retrieve(charge_id, function (err, charge) {
+      
+          var sfDocRef = firestoreDb.collection("receipt_number").doc("receipt_id");
+          firestoreDb.runTransaction((transaction) => {
+             return transaction.get(sfDocRef).then((sfDoc) => {
+             if (!sfDoc.exists) {
+               throw "Document does not exist!";
+             }
+       
+             receipt_number = sfDoc.data().last;
+             var dt = new Date();
+             var year_db = receipt_number.toString().substring(0, 4);
+             var cur_year = dt.getFullYear().toString();
+             if (year_db === cur_year) {
+       
+               var last = sfDoc.data().last + 1;
+               transaction.update(sfDocRef, { last: last });
+       
+             }
+             else {
+               var new_year = parseInt(year_db);
+               new_year++;
+               year_db = new_year + '0000000';
+               new_year = parseInt(year_db);
+               receipt_number = new_year;
+       
+               transaction.update(sfDocRef, { last: ++new_year });
+             }
+       
+           
+           });
+         }).then((last) => {
+       
+          firestoreDb.collection('users').doc(user_id).get().then((doc)=>{
+            console.log(doc.data());
+           
+           var data ={
+            email : doc.data().email,
+            gift : doc.data().giftAid,
+            name : doc.data().name,
+            receipt_number : receipt_number
+            }
+      
+             html(charge,data);
+      
+         })
+         
+           
+         }).catch((err) => {
+       
+           console.error(err);
+         });
+      
+          res.send('Donation receipt sent.');
+      
+        });
+      
+      
+      });
+      
+    
   
 
 

@@ -30,6 +30,7 @@
     "@angular/router": "~5.2.9",
     "@ng-bootstrap/ng-bootstrap": "^1.0.4",
     "angularfire2": "^5.0.0-rc.6",
+    "async": "^2.6.1",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
@@ -43,8 +44,8 @@
     "nodemailer": "^4.6.4",
     "popper.js": "^1.14.1",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19",
-    "stripe": "^5.5.0"
+    "stripe": "^5.5.0",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",
