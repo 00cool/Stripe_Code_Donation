@@ -8,7 +8,7 @@ const stripe = require("stripe")(
   );
   var htmlToPdf = require('./html');
 var html = require('./html.js');
-  // app.use(express.static(__dirname + '/dist'));
+  app.use(express.static(__dirname + '/dist'));
   app.use('*', (req, res, next) => {
     let allowedOrigins = ['http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/'];
     let origin = req.headers.origin;
