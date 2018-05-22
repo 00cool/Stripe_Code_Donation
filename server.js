@@ -7,11 +7,8 @@ var serviceAccount = require('./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d
 const stripe = require("stripe")(
     "sk_test_xtz7vzUNDhyFM1leNDKmLLAW"
   );
-  var htmlToPdf = require('./html');
-var html = require('./html.js');
-  app.use(express.static(__dirname + '/dist'));
   app.use('*', (req, res, next) => {
-    let allowedOrigins = ['http://localhost:4200', 'http://localhost:5000','https://stripepaymentdonation.herokuapp.com/'];
+    let allowedOrigins = ['http://localhost:4200', 'http://localhost:8080','https://stripepaymentdonation.herokuapp.com/'];
     let origin = req.headers.origin;
     if (allowedOrigins.indexOf(origin) > -1) {
       console.log(origin);
@@ -22,6 +19,10 @@ var html = require('./html.js');
     res.set('Access-Control-Allow-Methods', "GET,POST,PUT,OPTIONS,DELETE");
     next();
   });
+  var htmlToPdf = require('./html');
+var html = require('./html.js');
+  app.use(express.static(__dirname + '/dist'));
+  
   app.use(bodyParser.json());
   
 // raw data parse
@@ -620,57 +621,57 @@ nodemailer.createTestAccount((err, account) => {
 
 // sent mail with receipt pdf
     
-app.post('/sendMailReceipt', function (req, res) {
-  var pdfData = req.body +  '';
-   var email = req.param('email');
-  console.log('id====== ' + email);
+// app.post('/sendMailReceipt', function (req, res) {
+//   var pdfData = req.body +  '';
+//    var email = req.param('email');
+//   console.log('id====== ' + email);
 
-  // console.log('pdfData ' +pdfData);
-  // console.log('email ' + email);
-  var transporter = nodemailer.createTransport({
-    name: 'Godaddy',
-    host: "smtpout.secureserver.net",
-    secure: true,
-    port: 465,
-    auth: {
-    user: 'info@jump360.me',
-    pass: 'jump@2017360'
-  }
-});
+//   // console.log('pdfData ' +pdfData);
+//   // console.log('email ' + email);
+//   var transporter = nodemailer.createTransport({
+//     name: 'Godaddy',
+//     host: "smtpout.secureserver.net",
+//     secure: true,
+//     port: 465,
+//     auth: {
+//     user: 'info@jump360.me',
+//     pass: 'jump@2017360'
+//   }
+// });
 
-  const mailOptions = {
-    from: 'info@jump360.me', // sender address
-    to: email, // list of receivers
-    subject: 'Donation Payment Receipt', // Subject line
-    text: "Hare Krishna!\n\n" +
+//   const mailOptions = {
+//     from: 'info@jump360.me', // sender address
+//     to: email, // list of receivers
+//     subject: 'Donation Payment Receipt', // Subject line
+//     text: "Hare Krishna!\n\n" +
 
-      "        Thanks for your contribution. Please find your donation receipt below.\n\n" +
+//       "        Thanks for your contribution. Please find your donation receipt below.\n\n" +
 
-      "Regards,\n" +
-      "ASK Krishna",
-    attachments: [{
-      filename: 'receipt.pdf',
-      contentType: 'application/pdf',
-      path: pdfData
-    }]
-  };
+//       "Regards,\n" +
+//       "ASK Krishna",
+//     attachments: [{
+//       filename: 'receipt.pdf',
+//       contentType: 'application/pdf',
+//       path: pdfData
+//     }]
+//   };
 
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-      console.log("======from the mail.js======" + err);
-      res.status(200).send('Mail send');
-    }
+//   transporter.sendMail(mailOptions, function (err, info) {
+//     if (err) {
+//       console.log("======from the mail.js======" + err);
+//       res.status(200).send('Mail send');
+//     }
 
-    else {
-      console.log("======from the mail.js======" + info);
-      res.status(200).send('Error in sending Mail');
-    }
+//     else {
+//       console.log("======from the mail.js======" + info);
+//       res.status(200).send('Error in sending Mail');
+//     }
 
-  });
+//   });
 
-  res.status(200).send('success');
+//   res.status(200).send('success');
 
-})
+// })
 
 
 app.get('/sentMail', function (req, res) {
