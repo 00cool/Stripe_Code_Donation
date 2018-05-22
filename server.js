@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 var admin = require("firebase-admin");
+var serviceAccount = require('./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json');
 const stripe = require("stripe")(
     "sk_test_xtz7vzUNDhyFM1leNDKmLLAW"
   );
@@ -27,8 +28,8 @@ var html = require('./html.js');
 
 app.use(bodyParser.raw({ limit: '50mb', type: 'text' }))
 app.use(bodyParser.raw({ type: 'application/json',limit: '50mb' }))
-  var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json");
-
+ 
+//  G:\Stripe_Payment\firebase\donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://donationapp-3a9ae.firebaseio.com"

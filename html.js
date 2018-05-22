@@ -3,7 +3,7 @@ var fs = require('fs');
 const nodemailer = require('nodemailer');
 var async = require('async');
 
-var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-c14a38e71f.json");
+var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json");
 
 
 var List = [];
