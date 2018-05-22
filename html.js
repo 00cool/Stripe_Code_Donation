@@ -364,20 +364,23 @@ function SendMail(email){
   // var pdf = buffer + '';
   // console.log('pdf '+ pdf)
   var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    name: 'Godaddy',
+    host: "smtpout.secureserver.net",
+    secure: true,
+    port: 465,
     auth: {
-      user: 'jump3602017@gmail.com',
-      pass: 'Jump@3602017'
+    user: 'info@jump360.me',
+    pass: 'jump@2017360'
     }
-  });
+    });
 
   const mailOptions = {
-    from: 'jump3602017@gmail.com', // sender address
+    from: 'info@jump360.me', // sender address
     to: email, // list of receivers
     subject: 'Donation Payment Receipt', // Subject line
     text: "Hare Krishna!\n\n" +
 
-      "        Thanks for your contribution. Please find your donation receipt below.\n\n" +
+      "        Thank you for your contribution. Please find attached your donation receipt.\n\n" +
 
       "Regards,\n" +
       "ASK Krishna",
