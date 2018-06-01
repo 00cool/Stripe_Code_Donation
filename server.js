@@ -59,7 +59,7 @@ app.get('/getUserData', (req, res) => {
 
   firestoreDb.collection('users').where('email',"==",email).get().then(function(querySnapshot){
     querySnapshot.forEach(function(doc){
-      console.log(doc.id, " => ", );
+      console.log(doc.id, " => " );
       if(doc.data().consentEmail)
       {
           res.status(200).send('User will get email');
@@ -619,60 +619,6 @@ nodemailer.createTestAccount((err, account) => {
     });
 
 
-// sent mail with receipt pdf
-    
-// app.post('/sendMailReceipt', function (req, res) {
-//   var pdfData = req.body +  '';
-//    var email = req.param('email');
-//   console.log('id====== ' + email);
-
-//   // console.log('pdfData ' +pdfData);
-//   // console.log('email ' + email);
-//   var transporter = nodemailer.createTransport({
-//     name: 'Godaddy',
-//     host: "smtpout.secureserver.net",
-//     secure: true,
-//     port: 465,
-//     auth: {
-//     user: 'info@jump360.me',
-//     pass: 'jump@2017360'
-//   }
-// });
-
-//   const mailOptions = {
-//     from: 'info@jump360.me', // sender address
-//     to: email, // list of receivers
-//     subject: 'Donation Payment Receipt', // Subject line
-//     text: "Hare Krishna!\n\n" +
-
-//       "        Thanks for your contribution. Please find your donation receipt below.\n\n" +
-
-//       "Regards,\n" +
-//       "ASK Krishna",
-//     attachments: [{
-//       filename: 'receipt.pdf',
-//       contentType: 'application/pdf',
-//       path: pdfData
-//     }]
-//   };
-
-//   transporter.sendMail(mailOptions, function (err, info) {
-//     if (err) {
-//       console.log("======from the mail.js======" + err);
-//       res.status(200).send('Mail send');
-//     }
-
-//     else {
-//       console.log("======from the mail.js======" + info);
-//       res.status(200).send('Error in sending Mail');
-//     }
-
-//   });
-
-//   res.status(200).send('success');
-
-// })
-
 
 app.get('/sentMail', function (req, res) {
 
@@ -777,7 +723,73 @@ app.get('/sentMail', function (req, res) {
       });
       
     
-  
+  // api for send receipt for year donation
+
+app.post('/sendYearPdf', function (req, res) {
+
+
+  var date = req.body.date + '';
+  var name =  req.body.name;
+  var email = req.body.email;
+  var customer_id = req.body.customer_id;
+
+  if(!date)
+    charge_id = req.query.date;
+ if(!name)
+    user_id = req.query.name;
+ if(!email)
+    charge_id = req.query.email;
+ if(!customer_id)
+    user_id = req.query.customer_id;
+ 
+ 
+
+  var start = new Date(date.split('to')[0]);
+  var end = new Date(date.split('to')[1]);
+
+  console.log(start + ' to ' + end);
+
+ var arr = [];
+
+ function paginateCharges(last_id){
+   var req_params = { limit : 100 ,  customer : customer_id}
+   if(last_id!== undefined){
+   req_params.starting_after = last_id
+   }
+   stripe.charges.list(
+   req_params,
+   function(err, charges) {
+   
+   for (i = 0; i < charges.data.length; i++){
+   var trn_date = new Date(charges.data[i].created * 1000);
+     if(trn_date >= start && trn_date <= end)
+       arr.push(charges.data[i]);
+
+   }
+   // Check for more
+   if (charges.has_more) {
+   paginateCharges(charges["data"][charges["data"].length - 1].id);
+   }
+   else{
+   var x = {};
+   x.data = arr;
+   // x.amount = amount;
+   // x.td = time_data;
+   // console.log(arr);
+
+   yearpdf(arr,email,name);
+   console.log(arr.length);
+   res.send(arr);
+   
+   }
+   }
+   )}
+   var last_id;
+   paginateCharges(last_id);
+   
+
+ });
+
 
 
 
