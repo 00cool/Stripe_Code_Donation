@@ -2,78 +2,61 @@ var pdf = require('html-pdf');
 var fs = require('fs');
 const nodemailer = require('nodemailer');
 var async = require('async');
+var serviceAccount = require('./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json');
 
-var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json");
 
-
-var List = [{
-    name : 'Sharad Purnima Festival Festival',
-    amount : '£ 50'
-  },
-  {
-   name : 'Sharad Purnima Festival Festival',
-   amount : '£ 50'
- },{
-   name : 'Sharad Purnima Festival Festival',
-   amount : '£ 50'
- },{
-   name : 'Sharad Purnima Festival Festival',
-   amount : '£ 50'
- },{
-   name : 'Sharad Purnima Festival Festival',
-   amount : '£ 50'
- },
- ];
+var List = [];
 
 
 var receipt_number = '201800000';
 
-function yearPdf(arr,email,name) {
+function yearPdf(arr, email, name) {
 
- var name_data = `<div style="margin-top: 10px; "><span style=" color: #6A6A6A;font-weight:bold; font-size: 25px">Hare Krishna ` + name + `</span></div>` 
+  var name_data = `<div style="margin-top: 10px; "><span style=" color: #6A6A6A;font-weight:bold; font-size: 25px">Hare Krishna ` + name + `</span></div>`
 
- var cart_data = ``;
+  var cart_data = ``;
+  var total_amount = 0;
+  for (var i = 0; i < arr.length; i++) {
 
-  for(var i=0;i<arr.length;i++){
+    total_amount += arr[i].amount;
     List = [];
-    if(arr[i].metadata != null)
-var keys = Object.keys(arr[i].metadata); 
+    if (arr[i].metadata != null)
+      var keys = Object.keys(arr[i].metadata);
 
-for (var j = 0; j < keys.length; j++) {
-  if (keys[j] === "latitude" || keys[j] === "longitude") {
+    for (var j = 0; j < keys.length; j++) {
+      if (keys[j] === "latitude" || keys[j] === "longitude") {
 
-  }
-  else {
-    List.push({ name: keys[j], amount: arr[i].metadata[keys[j]] })
+      }
+      else {
+        List.push({ name: keys[j], amount: arr[i].metadata[keys[j]] })
 
-  }
+      }
 
-}
-var table_data = ``;
-for(var j=0;j<List.length;j++){
-var amount = List[j].amount.split('|');
+    }
+    var table_data = ``;
+    for (var j = 0; j < List.length; j++) {
+      var amount = List[j].amount.split('|');
 
-  table_data = table_data +  `<tr>
-  <td style="color: #676767; font-size: 20px">` + List[j].name  + `</td>
-  <td style="color: #676767; font-size: 20px" > £` + amount[amount.length-1] +`</td>
+      table_data = table_data + `<tr>
+  <td style="padding-left: 30px;color: #676767; font-size: 18px; width:50% ">` + List[j].name + `</td>
+  <td style="color: #676767; font-size: 18px; margin-right: 0px;width:50%;text-align: end;padding-right:20px"> £` + parseFloat(Math.round(amount[amount.length - 1] * 100) / 100).toFixed(2) + `</td>
 </tr>`
-  }
+    }
 
-  // console.log(table_data);
- var date =new Date(arr[i].created * 1000) + ''; 
+    // console.log(table_data);
+    var date = new Date(arr[i].created * 1000) + '';
     cart_data = cart_data + `<div style="margin: 2%;box-shadow: 1px 1px 1px 1px #676767 ">
     <div style="padding: 15px">
    
-      <span style="color: #676767 ; font-size: 20px"> Transaction ID-` + arr[i].id + `</span>
-      <span style="color: #676767; float: right; font-size: 25px"> ` + date.slice(0,15)  +`</span>
+      <span style="color: #676767; float: right; font-size: 25px"> ` + date.slice(0, 15) + `</span>
   </div>
-      <table style="border-top: 1px solid black; width: 100% ">` 
-      
+      <table style="border-top: 1px solid black; width: 100% ">`
+
       + table_data +
-       
-        `<tr style="border-top: 1px solid black; "> 
-          <td style="color: #676767;font-size: 25px"> Total Donations</td>
-          <td style="color: #F39200; font-size: 25px">£ `+ (arr[i].amount / 100) +` </td>
+
+      `<tr style="border-top: 1px solid black; "> 
+          <td style="padding-left: 30px;color: #676767;font-size: 25px;width:50%"> Sub Total Donations</td>
+          <td style="color: #F39200; font-size: 25px;width:50%;text-align: end;padding-right:20px">£`+ parseFloat(Math.round(arr[i].amount) / 100).toFixed(2) + ` </td>
           </tr>
         
       </table>
@@ -81,15 +64,22 @@ var amount = List[j].amount.split('|');
    
   </div>`
 
-    
-  
-  
+
+
+
 
   }
 
-    //  console.log(table_data);
 
-  var html =`<html>
+
+
+
+
+
+
+  //  console.log(table_data);
+
+  var html = `<html>
   <head></head>
   <body>
     <div style="background: #ffffff; margin: auto; min-width: 98%; width: 98%;">
@@ -153,12 +143,17 @@ var amount = List[j].amount.split('|');
 
         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" alt="logo">
      
-       `+ name_data +`
+       `+ name_data + `
        
        <h1 style="color: #F39200;">Donation Summary(2018-2019)</h1>
       </div>
       `+ cart_data + `
       </div>
+
+      <div style="border-top: 1px solid black; "> 
+          <span style="padding-left: 30px;color: #676767;font-size: 25px; width:50%"> Total Donations</span>
+          <span style="color: #F39200; font-size: 25px;float: right; margin-right: 20px;">£`+ parseFloat(Math.round(total_amount) / 100).toFixed(2) + ` </span>
+          </div>
     </div>
   
   </body>
@@ -166,32 +161,45 @@ var amount = List[j].amount.split('|');
 
 </html>`
 
-pdf.create(html).toFile('./year.pdf',function(err,stream){
-  if(err){
-      console.log(err);
-  }
-  else{
-      // console.log(stream+'');
-       SendMail(email);
-  }
-})
+  var options = {
+    format: 'Letter',
+    paginationOffset: 1,
+    "footer": {
+      "height": "20mm",
+      "contents": {
+        // Any page number is working. 1-based index
+        default: '<div style="text-align:center; border-top:1px solid black;matgin-top:15px"><span style="color: #444; float:center">{{page}}</span>/<span>{{pages}}</span></div>', // fallback value
 
- 
+      }
+    },
+  };
+
+  pdf.create(html, options).toFile('./year.pdf', function (err, stream) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      // console.log(stream+'');
+      SendMail(email);
+    }
+  })
+
+
 }
 
 
-function SendMail(email){
+function SendMail(email) {
 
   // var pdf = buffer + '';
   // console.log('pdf '+ pdf)
   var transporter = nodemailer.createTransport({
     name: 'Godaddy',
-      host: "smtpout.secureserver.net",
-      secure: true,
-      port: 465,
+    host: "smtpout.secureserver.net",
+    secure: true,
+    port: 465,
     auth: {
       user: 'info@jump360.me',
-    pass: 'jump@2017360'
+      pass: 'jump@2017360'
     }
   });
 
@@ -225,11 +233,10 @@ function SendMail(email){
   });
 
   // res.status(200).send('success');
-   return;
+  return;
 }
 
 // htmlToPdf();
 
- module.exports  =yearPdf ;
-
+module.exports = yearPdf;
 
