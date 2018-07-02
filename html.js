@@ -40,7 +40,7 @@ var giftAd = (UserData.gift) ? 'YES' : 'No';
 
     var amount = List[i].amount.split('|');
     table_data = table_data + `<tr>
-      <td class="subTableData"> `+ List[i].name +`</td>
+      <td class="subTableData"> `+ amount[0] +`</td>
     
       <td class="subTableData">£`+ parseFloat(Math.round(amount[amount.length - 1] * 100) / 100).toFixed(2)    +`</td>
     </tr>`
