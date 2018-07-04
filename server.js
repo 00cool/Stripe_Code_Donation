@@ -154,9 +154,13 @@ app.post("/charge", (req, res) => {
   var shipping = req.body.shipping;
   var source = req.body.source;
   var metadata = req.body.metadata;
+  var description = req.body.description;
 
   if (!amount)
     amount = req.query.amount;
+
+  if(!description)
+  description = req.query.description;
 
   if (!customerId)
     customerId = req.query.customer_id;
@@ -179,7 +183,7 @@ app.post("/charge", (req, res) => {
   stripe.charges.create({
     amount: amount,
     currency: "gbp",
-    description: "Example charge",
+    description: description,
     source: source,
     shipping: shipping,
     customer: customerId,
