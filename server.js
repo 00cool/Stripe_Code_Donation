@@ -441,7 +441,7 @@ function sendUserEmail(email, callback) {
       secure: true,
       port: 465,
       auth: {
-        user: 'info@jump360.me',
+        user: 'info@jump360.in',
         pass: 'jump@2017360'
       }
     });
@@ -766,7 +766,7 @@ app.post('/sendYearPdf', function (req, res) {
    
    for (i = 0; i < charges.data.length; i++){
    var trn_date = new Date(charges.data[i].created * 1000);
-     if(trn_date >= start && trn_date <= end)
+   if(trn_date >= start && trn_date <= end && charges.data[i].description == "Donation")
        arr.push(charges.data[i]);
 
    }

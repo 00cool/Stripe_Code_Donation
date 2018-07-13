@@ -38,7 +38,7 @@ function yearPdf(arr, email, name) {
       var amount = List[j].amount.split('|');
 
       table_data = table_data + `<tr>
-  <td style="padding-left: 30px;color: #676767; font-size: 18px; width:50% ">` + List[j].name + `</td>
+  <td style="padding-left: 30px;color: #676767; font-size: 18px; width:50% ">` + amount[0] + `</td>
   <td style="color: #676767; font-size: 18px; margin-right: 0px;width:50%;text-align: end;padding-right:20px"> £` + parseFloat(Math.round(amount[amount.length - 1] * 100) / 100).toFixed(2) + `</td>
 </tr>`
     }
@@ -198,7 +198,7 @@ function SendMail(email) {
     secure: true,
     port: 465,
     auth: {
-      user: 'info@jump360.me',
+      user: 'info@jump360.in',
       pass: 'jump@2017360'
     }
   });
