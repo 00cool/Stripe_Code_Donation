@@ -194,7 +194,7 @@ app.post("/charge", (req, res) => {
 
     if (err != null) {
       console.log(err.raw);
-      res.status(err.statusCode).send({'status':false,'message':"Payment Failed!",'code':400,'error':err.raw});
+      res.status(200).send({'status':false,'message':"Payment Failed!",'code':400,'error':err.raw});
     }
     else if (charge != null) {
       console.log(charge);
