@@ -193,13 +193,13 @@ app.post("/charge", (req, res) => {
     // asynchronously called
 
     if (err != null) {
-      console.log(err);
-      res.status(402).json(err);
+      console.log(err.raw);
+      res.status(err.statusCode).send({'status':false,'message':"Payment Failed!",'code':400,'error':err.raw});
     }
     else if (charge != null) {
       console.log(charge);
       // sendUserEmail();
-      res.status(200).json(charge);
+      res.status(200).send({'status':true,'message':"Payment success!",'code':200,'content':charge});
     }
   });
 });
