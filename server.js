@@ -795,7 +795,62 @@ app.post('/sendYearPdf', function (req, res) {
 
  });
 
+//Delete Card 
 
+app.post("/deleteCard",function(req , res){
+
+  //cust and card id : cus_CefgaMlFMgYIF8 , card_1Cp93VBOPVtYY8u1DGjE4cHk
+
+  var customer_id = req.body.customer_id;
+  var source_id = req.body.source_id;
+  if(!customer_id)
+  customer_id = req.query.customer_id;
+  if(!source_id)
+    source_id = req.query.source_id;
+
+  if (!customer_id) {
+    res.status(400).end();
+    return;
+  }
+  if (!source_id) {
+    res.status(400).end();
+    return;
+  }
+  console.log(customer_id,source_id);
+
+  stripe.customers.deleteCard(customer_id,source_id,function(err,confirmation)
+{
+  if(err)
+  {
+    res.status(500).send({
+      status:false,
+      message:"Error in Deleting Card.Please try again",
+      code:500
+    })
+  }
+
+  else if(confirmation)
+  {
+    if(confirmation.deleted){
+      res.status(200).send({
+        status:true,
+        message:"Card Deleted Successfully.",
+        code:200
+      })
+    }
+    else{
+      res.status(200).send({
+        status:false,
+        message:"Error in Deleting Card.Please try again",
+        code:200
+      })
+    }
+  }
+ 
+  // console.log(confirmation);
+ // res.send(confirmation);
+})
+});
 
 
 // start server code
