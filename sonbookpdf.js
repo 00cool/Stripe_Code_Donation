@@ -388,7 +388,7 @@ function SendMail(email){
 
   const mailOptions = {
     from: 'info@jump360.me', // sender address
-    to: "harshadakhani8882@gmail.com" , // list of receivers
+    to: email , // list of receivers
     subject: 'SongBook Payment Receipt', // Subject line
     text: "Hare Krishna!\n\n" +
 
