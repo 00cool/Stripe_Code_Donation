@@ -151,7 +151,7 @@ td {
     <tr style="display: grid; grid-template-columns: 1fr;">
       <table class="subTable" style="width: 100%; border: 1px solid  #999;">
         <tr style="border-top : 2px solid">
-          <td style="width: 50%; border: 0; font-weight: bold;">Item</td>
+          <td style="width: 50%; border: 0; font-weight: bold;">Song Name</td>
           <td style="width: 50%; border: 0; font-weight: bold;">Amount</td>
         </tr>
         ` +   table_data   +    `
@@ -389,7 +389,7 @@ function SendMail(email){
   const mailOptions = {
     from: 'info@jump360.me', // sender address
     to: email , // list of receivers
-    subject: 'SongBook Payment Receipt', // Subject line
+    subject: 'Song Book Payment Receipt', // Subject line
     text: "Hare Krishna!\n\n" +
 
       "        Thank you for downloading..\n\n Please find attached your donation receipt.\n\n" +
