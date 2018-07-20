@@ -2,7 +2,8 @@ var pdf = require('html-pdf');
 var fs = require('fs');
 const nodemailer = require('nodemailer');
 var async = require('async');
-var serviceAccount = require('./donationapp-3a9ae-firebase-adminsdk-f4ms5-f6837d8737.json');
+
+var serviceAccount = require("./donationapp-3a9ae-firebase-adminsdk-f4ms5-c14a38e71f.json");
 
 
 var List = [];
@@ -17,6 +18,14 @@ function yearPdf(arr, email, name) {
   var cart_data = ``;
   var total_amount = 0;
   for (var i = 0; i < arr.length; i++) {
+var span = ``;
+    if(arr[i].status == 'succeeded')
+    {
+          span = `<span style="color: #5BC236; float: left; font-size: 25px"> ` + 'Succeeded'  + `</span>`;
+    }
+    else{
+      span = `<span style="color: #f94f4f; float: left; font-size: 25px"> ` + 'Failed'  + `</span>`;
+    }
 
     total_amount += arr[i].amount;
     List = [];
@@ -47,7 +56,7 @@ function yearPdf(arr, email, name) {
     var date = new Date(arr[i].created * 1000) + '';
     cart_data = cart_data + `<div style="margin: 2%;box-shadow: 1px 1px 1px 1px #676767 ">
     <div style="padding: 15px">
-   
+    ` + span + `
       <span style="color: #676767; float: right; font-size: 25px"> ` + date.slice(0, 15) + `</span>
   </div>
       <table style="border-top: 1px solid black; width: 100% ">`
@@ -198,8 +207,8 @@ function SendMail(email) {
     secure: true,
     port: 465,
     auth: {
-      user: 'info@jump360.in',
-      pass: 'jump@2017360'
+      user: 'info@jump360.me',
+      pass: 'fruitsalad@123'
     }
   });
 
