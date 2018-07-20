@@ -207,8 +207,8 @@ function SendMail(email) {
     secure: true,
     port: 465,
     auth: {
-      user: 'info@jump360.me',
-      pass: 'fruitsalad@123'
+      user: 'info@jump360.in',
+      pass: 'jump@2017360'
     }
   });
 
