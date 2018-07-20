@@ -22,6 +22,7 @@ const stripe = require("stripe")(
   var htmlToPdf = require('./html');
 var html = require('./html.js');
 var yearpdf = require('./yearpdf.js')
+var songbookpdf = require('./sonbookpdf.js')
   app.use(express.static(__dirname + '/dist'));
   
   app.use(bodyParser.json());
